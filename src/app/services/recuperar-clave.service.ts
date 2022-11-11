@@ -13,7 +13,7 @@ export class RecuperarClaveService {
 
   recuperarClave(rut: any): Promise<any>{
     return new Promise ((resolve,reject)=>{
-      this.httpClient.post<any>(`${URL}/api/enviar_email`,{
+      this.httpClient.post<any>(`${URL}/api/recuperar-clave`,{
         rut
       })
       .subscribe(res =>{
