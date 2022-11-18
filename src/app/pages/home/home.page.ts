@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 
 @Component({
@@ -12,7 +13,23 @@ export class HomePage implements OnInit {
   tituloPagina = 'Home';
   iconoEncabezado = 'home';
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute,private barcodeScanner: BarcodeScanner) { }
+
+  ionViewWillEnter(){
+    console.log('viewWillEnter');
+    this.scan();
+  }
+
+  scan(){
+    alert('Inicio');
+      this.barcodeScanner.scan().then(barcodeData =>{
+      //console.log('barcode data ',barcodeData);
+      alert('Bar code data ='+barcodeData.text);
+    }).catch(err =>{
+      //console.log('Error',err);
+      alert(JSON.stringify(err));
+    });
+  }
 
 
   ngOnInit() {

@@ -33,18 +33,4 @@ export class LoginServiceService {
   };
 
 
-  //GET
-  // obtenerUsuario(rut: any): Promise <any>{
-  //   return new Promise ((resolve, reject)=>{
-  //     this.httpClient.get(`${URL}/api/detalle_usuario/<'+rut+'>`,rut)
-  //     .subscribe(res =>{
-  //       resolve(res);
-  //     } ,(err) =>{
-  //       reject(err);
-  //     });
-  //   });
-  // };
-
-
-
 }
