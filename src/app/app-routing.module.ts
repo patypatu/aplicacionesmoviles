@@ -42,10 +42,17 @@ const routes: Routes = [
     //loadChildren: () => import('./components/folder.module').then( m => m.FolderPageModule)
   },
   {
-    path: 'detalle-usuario',
-    loadChildren: () => import('./pages/detalle-usuario/detalle-usuario.module').then( m => m.DetalleUsuarioPageModule)
+    path: 'home-docente',
+    loadChildren: () => import('./pages/home-docente/home-docente.module').then( m => m.HomeDocentePageModule)
+  },
+  {
+    path: 'generarqr-docente',
+    loadChildren: () => import('./pages/generarqr-docente/generarqr-docente.module').then( m => m.GenerarqrDocentePageModule)
+  },
+  {
+    path: 'asistencia-docente',
+    loadChildren: () => import('./pages/asistencia-docente/asistencia-docente.module').then( m => m.AsistenciaDocentePageModule)
   }
-
 
 
 ];
