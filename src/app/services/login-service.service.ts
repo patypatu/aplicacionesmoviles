@@ -22,7 +22,9 @@ export class LoginServiceService {
       })
       .subscribe(res =>{
         console.log(res);
-        this.localStorageService.persistirLogin(res);
+        if(res?.ok === true){
+          this.localStorageService.persistirLogin(res);
+        }
         resolve(res);
       } ,(err) => {
         console.log(err);

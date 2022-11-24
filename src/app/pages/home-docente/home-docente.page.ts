@@ -15,10 +15,7 @@ export class HomeDocentePage implements OnInit {
 
   constructor(private barcodeScanner: BarcodeScanner) { }
 
-  // ionViewWillEnter(){
-  //   console.log('viewWillEnter');
-  //   this.scan();
-  // }
+ 
 
   scan(){
     //alert('Inicio');

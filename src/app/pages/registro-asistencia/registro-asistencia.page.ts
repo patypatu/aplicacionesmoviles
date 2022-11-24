@@ -17,15 +17,7 @@ export class RegistroAsistenciaPage implements OnInit {
 
   constructor() { }
 
-  //  detalleUsuario(lista: any){
-  //   const navigationExtras: NavigationExtras = {
-  //     queryParams:{
-  //       estudiante: JSON.stringify(lista)
-  //     }
-  //   };
-     //this.navCtrl.navigateForward(['detalle/'],navigationExtras);
-  //  }
-
+ 
   ngOnInit() {
   }
 

@@ -17,6 +17,7 @@ export class LocalStorageService {
     const token = jwt_decode<MyToken>(res.token);
 
     localStorage.setItem('Name',token.nombre);
+    localStorage.setItem('decode_token',JSON.stringify(token));
     console.log(token);
 
   }
@@ -24,6 +25,7 @@ export class LocalStorageService {
     console.log('inicio');
     localStorage.removeItem('token');
     localStorage.removeItem('Name');
+    localStorage.removeItem('decode_token');
     console.log('fin');
   }
   tieneToken(){
@@ -32,4 +34,14 @@ export class LocalStorageService {
     }
     return false;
   }
+
+  getRole(){
+   const token = JSON.parse(localStorage.getItem('decode_token'));
+   return token.role;
+  }
+
+  getRut(){
+    const token = JSON.parse(localStorage.getItem('decode_token'));
+    return token.rut;
+   }
 }

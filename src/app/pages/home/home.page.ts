@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
+import { RegistroDataService } from 'src/app/services/registro-data.service';
 
 
 @Component({
@@ -13,21 +14,33 @@ export class HomePage implements OnInit {
   tituloPagina = 'Home';
   iconoEncabezado = 'home';
 
-  constructor(private activatedRoute: ActivatedRoute,private barcodeScanner: BarcodeScanner) { }
+  constructor(private activatedRoute: ActivatedRoute,private barcodeScanner: BarcodeScanner, 
+    private registroDataservice: RegistroDataService) { }
 
-  ionViewWillEnter(){
-    console.log('viewWillEnter');
-    this.scan();
-  }
+  // ionViewWillEnter(){
+  //   console.log('viewWillEnter');
+  //   this.scan();
+  // }
 
   scan(){
-    alert('Inicio');
+    //alert('Inicio');
+
       this.barcodeScanner.scan().then(barcodeData =>{
-      //console.log('barcode data ',barcodeData);
-      alert('Bar code data ='+barcodeData.text);
+      console.log('barcode data ',barcodeData);
+      //alert('Bar code data ='+barcodeData.text);
+
+      const scanner = JSON.parse(barcodeData.text);
+      //alert('Scanner: '+ JSON.stringify(scanner));
+
+      const datoQR = this.registroDataservice.guardarRegistro(scanner).then(a=>a).catch(e=>false);
+      
+      alert('Su asistencia esta registrada');
+
+
+
     }).catch(err =>{
-      //console.log('Error',err);
-      alert(JSON.stringify(err));
+      console.log('Error',err);
+      //alert(JSON.stringify(err));
     });
   }
 

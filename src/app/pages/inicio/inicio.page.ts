@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { MenuController, AlertController } from '@ionic/angular';
 import { AppComponent } from '../../app.component';
 import { LoginServiceService } from 'src/app/services/login-service.service';
+import jwt_decode from 'jwt-decode';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-inicio',
@@ -17,23 +19,34 @@ export class InicioPage implements OnInit {
   iconoEncabezado = 'enter';
 
   constructor(private router: Router, private menuCtrl: MenuController, private loginService: LoginServiceService,
-     private alertController: AlertController) { }
+     private alertController: AlertController, private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
   }
 
+
+
   async goToHomeParams(){
-    const respLogin = await this.loginService.login(this.name,this.pass).then(a=>true).catch(e=>false); //service login
-    console.log('respLogin: '+ respLogin);
+    const respLogin = await this.loginService.login(this.name,this.pass).then(a=>a).catch(e=>false); //service login
+    console.log('respLogin: '+ JSON.stringify(respLogin));
 
 
     //Se esta habilitando el menu, la idea es que el menu vuelva a estar habilitado cuando se salga de la pagina de login
     //cuando exista logica de validacion del login solo debe habilitarse si las credenciales estan ok
     //otra opcion es mover la habilitacion del menu a otra vista con la misma funcion ionViewWillEnter (seria el home post login)
-    this.menuCtrl.enable(true);
 
-    if(respLogin === true){
-      this.router.navigate(['/home']);
+
+    if(respLogin?.ok === true){
+      this.localStorageService.getRole();
+      if(this.localStorageService.getRole() === 'docente'){
+        this.menuCtrl.enable(true,'menu-docente');
+        this.router.navigate(['/home-docente']);
+
+      }else{
+        this.menuCtrl.enable(true,'menu-estudiante');
+        this.router.navigate(['/home']);
+      }
+
     }else{
       //alert(`Usuario o Contraseña incorrectos`);
 
