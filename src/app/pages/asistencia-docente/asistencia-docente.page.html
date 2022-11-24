@@ -1,0 +1,105 @@
+<ion-header>
+  <app-encabezado [pageTitle]="tituloPagina" [iconTitle]="iconoEncabezado"> </app-encabezado>
+
+</ion-header>
+
+<ion-content>
+ 
+  <div><img src="assets/icon/header_clases.jpg" /></div>
+
+  <ion-item>
+    <ion-label>Bienvenido docente, {{name}}!</ion-label>
+    <ion-icon name="person-circle" size="large" slot="end"></ion-icon>
+  </ion-item>
+
+  <ion-row  class="ion-justify-content-center">
+    <ion-col class="ion-text-center">
+      <div>
+        <ion-list>
+          
+          <ion-item>
+            <ion-select [(ngModel)]="asignaturaDato"  name="asignatura" placeholder="Asignatura" (ionChange)="filtroAsignatura()" required>
+              <ion-select-option *ngFor="let asignatura of asignaturas" [value]="asignatura">{{asignatura.clase}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-grid>
+    <ion-list lines="full">
+      <ion-list-header >
+        <p>Registros</p>
+      </ion-list-header>
+      <div *ngFor="let item of items">
+        <ion-item color="light">
+          <ion-label>{{ item.asignatura }} - {{ item.fecha }} - {{item.nombre_estudiante}} </ion-label>
+        </ion-item>
+        
+      </div>
+    </ion-list>
+  </ion-grid>
+
+  <!-- <ion-list no-lines>
+    <th ion-item *ngFor="let item of items" >
+   {{ item.asignatura }}
+        <div class="item-note" item-right>
+     {{item.docente}}
+        </div>
+      </th>
+</ion-list> -->
+
+  <!-- <ul class="list-group">
+    <li *ngFor="let mensaje of mensajes" class="list-group-item">
+      <div [innerHTML]="mensaje.registro"></div>
+      <p>hola</p>
+    </li>
+  </ul> -->
+
+  <!-- <ion-list *ngIf="registrosDatos">
+    <ion-item *ngFor='let registro of registrosDatos'>
+        
+        <ion-label>
+            <h3>{{ registro.registros.asignatura }}</h3>
+        </ion-label>
+        
+    </ion-item>
+  </ion-list> -->
+
+  <!-- <ion-segment value="todos" (ionChange)="segmentChanged($event)">
+
+    <ion-segment-button value="todos">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="marvel">
+      <ion-label>marvel</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="dc">
+      <ion-label>dc</ion-label>
+    </ion-segment-button>
+    
+
+  </ion-segment> -->
+
+
+  
+
+  <!-- <ion-list lines="full">
+    <ion-list-header >
+      <ion-label><p>Hoy</p></ion-label>
+    </ion-list-header>
+    <ion-item color="light">
+      <ion-label>14:00 Estadistica</ion-label>
+    </ion-item>
+    <ion-item >
+      <ion-label>15:30 Inglés</ion-label>
+    </ion-item>
+    <ion-item color="light">
+      <ion-label>17:30 Programación </ion-label>
+    </ion-item>
+  </ion-list> -->
+
+</ion-content>
