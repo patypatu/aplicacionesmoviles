@@ -17,6 +17,7 @@ export class InicioPage implements OnInit {
   pass: string;
   tituloPagina = 'Ingreso Usuario';
   iconoEncabezado = 'enter';
+  loading = false;
 
   constructor(private router: Router, private menuCtrl: MenuController, private loginService: LoginServiceService,
      private alertController: AlertController, private localStorageService: LocalStorageService) { }
@@ -24,17 +25,27 @@ export class InicioPage implements OnInit {
   ngOnInit() {
   }
 
+  // ionViewDidEnter(): void {
+  //   console.log('ionViewDidEnter');
+  //   this.menuCtrl.enable(false);
+  // }
+  
+  // ionViewDidLeave(): void {
+  //   console.log('ionViewDidLeave');
+  //   this.menuCtrl.enable(true);
+  // }
 
 
   async goToHomeParams(){
+    this.loading = true;
     const respLogin = await this.loginService.login(this.name,this.pass).then(a=>a).catch(e=>false); //service login
+    this.loading = false;
     console.log('respLogin: '+ JSON.stringify(respLogin));
 
 
     //Se esta habilitando el menu, la idea es que el menu vuelva a estar habilitado cuando se salga de la pagina de login
     //cuando exista logica de validacion del login solo debe habilitarse si las credenciales estan ok
     //otra opcion es mover la habilitacion del menu a otra vista con la misma funcion ionViewWillEnter (seria el home post login)
-
 
     if(respLogin?.ok === true){
       this.localStorageService.getRole();
@@ -66,8 +77,8 @@ export class InicioPage implements OnInit {
    * https://ionicframework.com/docs/angular/lifecycle
    *
    */
-  ionViewWillEnter() {
-    this.menuCtrl.enable(false);
-  }
+  // ionViewWillEnter() {
+  //   this.menuCtrl.enable(false);
+  // }
 
 }

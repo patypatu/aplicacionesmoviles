@@ -38,7 +38,14 @@
         </ion-col>
         <ion-col>
           <div>
-            <ion-button name="ingresar"(click)="goToHomeParams()" color="myColor" [disabled]="nameInput.errors?.required || passInput.errors?.required">Ingresar</ion-button>
+            <ion-button style="width: 200px; text-align: center" name="ingresar"(click)="goToHomeParams()" color="myColor" [disabled]="nameInput.errors?.required || passInput.errors?.required || loading">
+              <ng-container *ngIf="loading">
+                <ion-img src="https://i.gifer.com/ZZ5H.gif" style="width: 16px; height: 16px" alt="The Wisconsin State Capitol building in Madison, WI at night"></ion-img>
+              </ng-container>
+              <ng-container *ngIf="!loading">
+                Ingresar
+              </ng-container>
+            </ion-button>
           </div>
         </ion-col>
         <ion-col>
